@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="Smbb.DocumentScanner.Control.DocumentScanner"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Smbb.DocumentScanner.Control"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid x:Name="root">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <telerik:RadComboBox
+                ItemsSource="{Binding AllCameras}"
+                SelectedItem="{Binding SelectedCamera, Mode=TwoWay}"
+                SelectionChanged="RadComboBox_SelectionChanged"
+                Margin="20"
+            />
+
+        <Grid x:Name="cameraContainer" Grid.Row="1">
+            <!-- webcam is loaded control here -->
+        </Grid>
+        <Grid Grid.Row="1">
+            
+            <!-- overlay helpers here : says if need to come closer, if nothing found -->
+            <Border Background="Red" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="10" CornerRadius="5" >
+                <TextBlock Text="Move Closer." FontWeight="Bold" FontSize="14" Foreground="White" />
+            </Border>
+            
+            
+            <!-- overlay shape of the detected document  -->
+            <Polygon Points="100,100 100,850 500,850 500,100" Stroke="#008000" Fill="#33008000" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            
+        </Grid>
+        
+
+        <!-- button to take the picture of the page or ticket -->
+        <!-- only enabled when edge detection is ok -->
+        <telerik:RadButton Grid.Row="2" Width="48" Height="48" Margin="10" Content="Capture" 
+                           IsEnabled="{Binding DocumentFound}" 
+                           />
+
+
+    </Grid>
+</UserControl>
