@@ -32,7 +32,6 @@ namespace Smbb.DocumentScanner.Control
         }
 
 
-
         bool documentFound;
         public bool DocumentFound
         {
@@ -43,8 +42,6 @@ namespace Smbb.DocumentScanner.Control
                 OnPropertyChanged(nameof(DocumentFound));
             }
         }
-
-
 
 
         Bitmap documentImage;
@@ -58,7 +55,38 @@ namespace Smbb.DocumentScanner.Control
             }
         }
 
+        bool previewMode = false;
+        public bool PreviewMode
+        {
+            get { return this.previewMode; }
+            set
+            {
+                this.previewMode = value;
+                OnPropertyChanged(nameof(PreviewMode));
+            }
+        }
 
+        string adjustButtonText = "Adjust Corners";
+        public string AdjustButtonText
+        {
+            get { return adjustButtonText; }
+            set
+            {
+                this.adjustButtonText = value;
+                OnPropertyChanged(nameof(AdjustButtonText));
+            }
+        }
 
+        bool adjustMode = false;
+        public bool AdjustMode
+        {
+            get { return adjustMode; }
+            set
+            {
+                this.adjustMode = value;
+                this.AdjustButtonText = this.adjustMode ? "Crop Image" : "Adjust Corners";
+                OnPropertyChanged(nameof(AdjustMode));
+            }
+        }
     }
 }
